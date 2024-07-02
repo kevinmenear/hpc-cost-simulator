@@ -17,3 +17,9 @@ tests/
 test_files
 test_files/*
 foo*
+
+kestrel_sacct_output/
+*.ipynb_checkpoints*
+
+jobs.csv
+jobs_.csv

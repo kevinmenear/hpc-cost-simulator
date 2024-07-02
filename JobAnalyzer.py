@@ -129,13 +129,15 @@ class JobAnalyzer(JobAnalyzerBase):
             if round_hour * SECONDS_PER_HOUR < self._starttime_dt.timestamp():
                 logger.debug(f"Skipping round_hour={round_hour} timestamp={round_hour * SECONDS_PER_HOUR} {timestamp_to_datetime(round_hour * SECONDS_PER_HOUR)}")
                 logger.debug(f"    starttime  hour={int(self._starttime_dt.timestamp() / SECONDS_PER_HOUR)} timestamp={self._starttime_dt.timestamp()} {self._starttime_dt}")
-                logger.debug(f"    endtime    hour={int(self._endtime_dt.timestamp() / SECONDS_PER_HOUR)} timestamp={self._endtime_dt.timestamp()} {self._endtime_dt}")
+                if self._endtime:
+                    logger.debug(f"    endtime    hour={int(self._endtime_dt.timestamp() / SECONDS_PER_HOUR)} timestamp={self._endtime_dt.timestamp()} {self._endtime_dt}") 
                 return
 
         if self._endtime:
             if round_hour * SECONDS_PER_HOUR > self._endtime_dt.timestamp():
                 logger.debug(f"Skipping round_hour={round_hour} timestamp={round_hour * SECONDS_PER_HOUR} {timestamp_to_datetime(round_hour * SECONDS_PER_HOUR)}")
-                logger.debug(f"    starttime  hour={int(self._starttime_dt.timestamp() / SECONDS_PER_HOUR)} timestamp={self._starttime_dt.timestamp()} {self._starttime_dt}")
+                if self._starttime:
+                    logger.debug(f"    starttime  hour={int(self._starttime_dt.timestamp() / SECONDS_PER_HOUR)} timestamp={self._starttime_dt.timestamp()} {self._starttime_dt}")
                 logger.debug(f"    endtime    hour={int(self._endtime_dt.timestamp() / SECONDS_PER_HOUR)} timestamp={self._endtime_dt.timestamp()} {self._endtime_dt}")
                 return
 
